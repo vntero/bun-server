@@ -7,22 +7,33 @@ export interface Contact {
   email: string,
 }
 
+const db = new Database('contacts.db')
+
 export const initDatabase = async (db: Database) => {
   await db.run('CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, author TEXT)')
 }
 
+// ----- CREATE a contact -----
+export const addContact = async (contact: Contact) => {
+  await initDatabase(db)
+
+  return await db.query('INSERT INTO contacts (name, phone, email) VALUES (?, ?) RETURNING id').get(contact.name, contact.phone, contact.email) as Contact
+}
+
+// ----- READ all contacts -----
 export const getContacts = async () => {
-  const db = new Database('contacts.db')
   await initDatabase(db)
 
   return db.query('SELECT * FROM contacts').all()
 }
 
-export const addContact = async (contact: Contact) => {
-  const db = new Database('contacts.db')
+
+
+// ----- UPDATE a contact -----
+export const updateContact = async (id: number, contact: Contact) => {
   await initDatabase(db)
 
-  const result = await db.query('INSERT INTO contacts (name, phone, email) VALUES (?, ?) RETURNING id').get(contact.name, contact.phone, contact.email) as Contact
-
-  return { ...contact, id: result.id } as Contact
+  return await db.run(`UPDATE contacts SET name = '${contact.name}', phone = '${contact.phone}', email = '${contact.email}'`)
 }
+
+// ----- Delete 
