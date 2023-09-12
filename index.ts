@@ -1,8 +1,3 @@
-const server = Bun.serve({
-    port: 3000,
-    fetch(request) {
-      return new Response("Welcome to Bun!")
-    },
-  })
-  
-  console.log(`Listening on localhost:${server.port}`)
+import { Elysia } from 'elysia'
+import { html } from '@elysiajs/html'
+import { createContact, readContacts, updateContact, deleteContact } from './db'

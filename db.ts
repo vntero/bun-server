@@ -14,20 +14,18 @@ export const initDatabase = async (db: Database) => {
 }
 
 // ----- CREATE a contact -----
-export const addContact = async (contact: Contact) => {
+export const createContact = async (contact: Contact) => {
   await initDatabase(db)
 
   return await db.query('INSERT INTO contacts (name, phone, email) VALUES (?, ?) RETURNING id').get(contact.name, contact.phone, contact.email) as Contact
 }
 
 // ----- READ all contacts -----
-export const getContacts = async () => {
+export const readContacts = async () => {
   await initDatabase(db)
 
   return db.query('SELECT * FROM contacts').all()
 }
-
-
 
 // ----- UPDATE a contact -----
 export const updateContact = async (id: number, contact: Contact) => {
@@ -36,4 +34,9 @@ export const updateContact = async (id: number, contact: Contact) => {
   return await db.run(`UPDATE contacts SET name = '${contact.name}', phone = '${contact.phone}', email = '${contact.email}'`)
 }
 
-// ----- Delete 
+// ----- DELETE a contact ----- 
+export const deleteContact = async (id: number) => {
+  await initDatabase(db)
+
+  return await db.run(`DELETE FROM contacts WHERE id = ${id}`)
+}
