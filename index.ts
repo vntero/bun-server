@@ -6,9 +6,10 @@ import { createContact, readContacts, updateContact, deleteContact } from './db'
 const app = new Elysia()
 
   // ----- Home Page -----
-  .get('/', () => 'Hello Worlk')
+  .get('/', () => 'Hello World')
+
   // ----- Create contact -----
-	.get('/create', () => createContact('FIXME'))
+	.post('/create', () => createContact('FIXME'))
 
   // ----- Read all contacts -----
   .get('/read', () => readContacts())
