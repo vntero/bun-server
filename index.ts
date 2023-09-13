@@ -1,6 +1,7 @@
 import { Elysia } from 'elysia'
 import { html } from '@elysiajs/html'
 import { createContact, readContacts, updateContact, deleteContact } from './db'
+import { Contact } from './db'
 
 // ----- Initiates the handler -----
 const app = new Elysia()
@@ -9,7 +10,10 @@ const app = new Elysia()
   .get('/', () => 'Hello World')
 
   // ----- Create contact -----
-	.post('/create', () => createContact('FIXME'))
+	.post('/create', ({ body }) => {
+    const contact = createContact(body as Contact)
+    body
+  })
 
   // ----- Read all contacts -----
   .get('/read', () => readContacts())
