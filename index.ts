@@ -12,7 +12,9 @@ const app = new Elysia()
   // ----- Create contact -----
 	.post('/create', ({ body }) => {
     const contact = createContact(body as Contact)
-    body
+    console.log("🔥🔥🔥 ~ file: index.ts:15 ~ .post ~ contact:", contact)
+    
+    'The contact ' + contact + ' has been created!'
   })
 
   // ----- Read all contacts -----
