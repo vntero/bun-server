@@ -12,17 +12,12 @@ const app = new Elysia()
   // ----- Create contact -----
 	.post('/create', async ({ body }) => {
     const { name, phone } = body as Contact
-    const cCard = {
-      name: name,
-      phone: phone
-    }
     try {
-      const result = await createContact( cCard )
-      console.log("🔥🔥🔥 ~ file: index.ts:21 ~ .post ~ result:", result)
+      await createContact( { name, phone } )
       return { message: 'Contact created!' }
     }
     catch (error) {
-      console.error('An error occurred:', error)
+      return { message: error }
     }
   })
 
