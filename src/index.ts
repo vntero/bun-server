@@ -25,7 +25,7 @@ const app = new Elysia()
   .get('/read', () => readContacts())
 
   // ----- Read one contact -----
-  .get('/read/:id', () => readContact())
+  .get('/read/:id', async ({ params: { id }}) => readContact(id))
 
   // ----- Update contact -----
   .get('/update', () => {
@@ -33,7 +33,7 @@ const app = new Elysia()
   })
 
   // ----- Delete contact -----
-  .delete('/delete/:id', async ({ params: { id }}) => deleteContact(id))
+  .delete('/delete/:id', async ({ params: { id }}) => await deleteContact(id))
 
   // ----- Tell which port is accessible -----
 	.listen(8080)
