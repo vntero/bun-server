@@ -25,18 +25,12 @@ const app = new Elysia()
   .get('/read', () => readContacts())
 
   // ----- Update contact -----
-  .get('/update', () => updateContact('FIXME', 'FIXME'))
+  .get('/update', () => {
+    updateContact('FIXME', 'FIXME')
+  })
 
   // ----- Delete contact -----
-  .delete('/delete/:id', async (context) => {
-    try {
-      await createContact( { name, phone } )
-      return { message: 'Contact created!' }
-    }
-    catch (error) {
-      return { message: error }
-    }
-  })
+  .delete('/delete/:id', async ({ params: { id }}) => deleteContact(id))
 
   // ----- Tell which port is accessible -----
 	.listen(8080)

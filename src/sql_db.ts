@@ -26,6 +26,13 @@ export const readContacts = async () => {
   return db.query('SELECT * FROM contacts').all()
 }
 
+// ----- READ one contact -----
+export const readContact = async (id: string) => {
+  await initDatabase(db)
+
+  return db.query(`READ FROM contacts WHERE id = ${id}`)
+}
+
 // ----- UPDATE a contact -----
 export const updateContact = async (id: number, contact: Contact) => {
   await initDatabase(db)
