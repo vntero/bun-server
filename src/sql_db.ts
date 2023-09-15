@@ -27,7 +27,7 @@ export const readContacts = async () => {
 }
 
 // ----- READ one contact -----
-export const readContact = async (id: string) => {
+export const readContact = async (id: number) => {
   await initDatabase(db)
 
   return db.query(`SELECT * FROM contacts WHERE id = ${id}`)
@@ -41,7 +41,7 @@ export const updateContact = async (id: number, contact: Contact) => {
 }
 
 // ----- DELETE a contact ----- 
-export const deleteContact = async (id: string) => {
+export const deleteContact = async (id: number) => {
   await initDatabase(db)
 
   return await db.run(`DELETE FROM contacts WHERE id = ${id}`)
