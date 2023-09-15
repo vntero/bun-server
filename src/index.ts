@@ -7,7 +7,7 @@ import { Contact } from './sql_db'
 const app = new Elysia()
 
   // ----- Home Page -----
-  .get('/', () => 'Hello World')
+  .get('/', () => 'Hello World!')
 
   // ----- Create contact -----
 	.post('/create', async ({ body }) => {
@@ -28,7 +28,15 @@ const app = new Elysia()
   .get('/update', () => updateContact('FIXME', 'FIXME'))
 
   // ----- Delete contact -----
-  .get('/delete', () => deleteContact('FIXME'))
+  .delete('/delete/:id', async (context) => {
+    try {
+      await createContact( { name, phone } )
+      return { message: 'Contact created!' }
+    }
+    catch (error) {
+      return { message: error }
+    }
+  })
 
   // ----- Tell which port is accessible -----
 	.listen(8080)

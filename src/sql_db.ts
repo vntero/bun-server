@@ -34,7 +34,7 @@ export const updateContact = async (id: number, contact: Contact) => {
 }
 
 // ----- DELETE a contact ----- 
-export const deleteContact = async (id: number) => {
+export const deleteContact = async (id: string) => {
   await initDatabase(db)
 
   return await db.run(`DELETE FROM contacts WHERE id = ${id}`)
