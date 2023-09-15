@@ -30,7 +30,7 @@ export const readContacts = async () => {
 export const readContact = async (id: string) => {
   await initDatabase(db)
 
-  return db.query(`READ FROM contacts WHERE id = ${id}`)
+  return db.query(`SELECT * FROM contacts WHERE id = ${id}`)
 }
 
 // ----- UPDATE a contact -----
